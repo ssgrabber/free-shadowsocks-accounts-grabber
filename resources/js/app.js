@@ -56,8 +56,12 @@ $(function(){
                         '</div>';
 
     $.ajax({
-        url: window.location.origin + '/free-shadowsocks/data.php',
-        // url: 'http://labs.pakcheong.com/free-shadowsocks/data.php',
+        url: (function(){
+            if(window.location.origin.indexOf('.local') > -1 || window.location.origin.indexOf('local.') > -1){
+                return window.location.origin + '/free-shadowsocks/data.php';
+            }
+            return 'http://labs.pakcheong.com/free-shadowsocks/data.php';
+        })(),
         data: debug,
         dataType: 'jsonp',
         jsonp: 'callback',
