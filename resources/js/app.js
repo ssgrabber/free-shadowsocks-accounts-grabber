@@ -108,6 +108,7 @@ $(function(){
             var $this = $(this);
             $this.find('.modal-title').text('Loading QR code...');
             $this.find('.modal-body .img').html('<div class="loader"></div>');
+            $this.find('.modal-body .img').css('background-image', '');
         })
         .on('shown.bs.modal', function (event) {
             var $btn = $(event.relatedTarget),
@@ -115,11 +116,11 @@ $(function(){
                 $this = $(this),
                 $imgContainer = $this.find('.modal-body .img'),
                 w = $imgContainer.width();
-            $this.find('.modal-title').text('Scan me...');
             $imgContainer.find('.loader').height(w);
             $imgContainer.height(w);
             var img = new Image();
             img.onload = function(){
+                $this.find('.modal-title').text('Scan me...');
                 $imgContainer.find('.loader').remove();
                 $imgContainer.css('background-image', 'url(' + url + ')');
             };
